@@ -1,0 +1,40 @@
+body{
+    background-color: #e6e3d2;
+}
+a{
+    text-decoration: none;
+    color: black;
+    font-weight: 600;
+}
+
+table{
+font-size: 0.9rem;
+}
+
+.btn{
+    font-size: 0.7rem;
+}
+
+.lista{
+    max-width: 30%;
+}
+.logo {
+max-width: 50%;
+}
+
+.item, .button-modal{
+    border: solid 1px black;
+}
+.item-tomato{
+    background-color: #ea627d;
+}
+
+.img-card{
+    max-width: 70%;
+}
+.img-modal{
+    max-width: 50%;
+}
+
+
+

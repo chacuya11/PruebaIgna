@@ -1,0 +1,182 @@
+-- phpMyAdmin SQL Dump
+-- version 5.1.3
+-- https://www.phpmyadmin.net/
+--
+-- Servidor: 127.0.0.1
+-- Tiempo de generación: 18-07-2023 a las 17:17:30
+-- Versión del servidor: 10.4.24-MariaDB
+-- Versión de PHP: 8.1.5
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+START TRANSACTION;
+SET time_zone = "+00:00";
+
+--
+-- Base de datos: `pruebaredk`
+--
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `alumnos`
+--
+
+CREATE TABLE `alumnos` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `apellidos` varchar(50) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `alumnos`
+--
+
+INSERT INTO `alumnos` (`id`, `nombre`, `apellidos`) VALUES
+(1, 'IGNACIO', 'ZAMUDIO PELAEZ'),
+(2, 'JUAN', 'DE DIOS CAMAS'),
+(9, 'PEDRO', 'JIMENEZ ALMENDRO');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `asignaturas`
+--
+
+CREATE TABLE `asignaturas` (
+  `id` int(11) NOT NULL,
+  `nombre` varchar(50) DEFAULT NULL,
+  `descripcion` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `asignaturas`
+--
+
+INSERT INTO `asignaturas` (`id`, `nombre`, `descripcion`) VALUES
+(1, 'Matematicas', 'Mates'),
+(2, 'Lengua', 'Lengua'),
+(3, 'Programacion', 'Programacion');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `expedientes`
+--
+
+CREATE TABLE `expedientes` (
+  `id` int(11) NOT NULL,
+  `id_alumno` int(11) DEFAULT NULL,
+  `id_asignatura` int(11) DEFAULT NULL,
+  `nota` float DEFAULT NULL,
+  `comentarios` text DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `expedientes`
+--
+
+INSERT INTO `expedientes` (`id`, `id_alumno`, `id_asignatura`, `nota`, `comentarios`) VALUES
+(1, 1, 1, 6, 'Bien'),
+(2, 1, 2, 10, 'Perfecto'),
+(4, 2, 1, 8, 'Casi '),
+(5, 2, 2, 5, 'Bien'),
+(6, 2, 3, 8, '8'),
+(9, 9, 3, 10, 'Perfecto');
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `telefonos`
+--
+
+CREATE TABLE `telefonos` (
+  `id` int(11) NOT NULL,
+  `id_alumno` int(11) DEFAULT NULL,
+  `telefono` varchar(20) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Volcado de datos para la tabla `telefonos`
+--
+
+INSERT INTO `telefonos` (`id`, `id_alumno`, `telefono`) VALUES
+(35, 1, '666555444'),
+(39, 9, '987987875'),
+(40, 2, '675345543');
+
+--
+-- Índices para tablas volcadas
+--
+
+--
+-- Indices de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `asignaturas`
+--
+ALTER TABLE `asignaturas`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indices de la tabla `expedientes`
+--
+ALTER TABLE `expedientes`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alumno` (`id_alumno`),
+  ADD KEY `id_asignatura` (`id_asignatura`);
+
+--
+-- Indices de la tabla `telefonos`
+--
+ALTER TABLE `telefonos`
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `id_alumno` (`id_alumno`);
+
+--
+-- AUTO_INCREMENT de las tablas volcadas
+--
+
+--
+-- AUTO_INCREMENT de la tabla `alumnos`
+--
+ALTER TABLE `alumnos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `asignaturas`
+--
+ALTER TABLE `asignaturas`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+
+--
+-- AUTO_INCREMENT de la tabla `expedientes`
+--
+ALTER TABLE `expedientes`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT de la tabla `telefonos`
+--
+ALTER TABLE `telefonos`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
+
+--
+-- Restricciones para tablas volcadas
+--
+
+--
+-- Filtros para la tabla `expedientes`
+--
+ALTER TABLE `expedientes`
+  ADD CONSTRAINT `expedientes_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`id`) ON DELETE CASCADE,
+  ADD CONSTRAINT `expedientes_ibfk_2` FOREIGN KEY (`id_asignatura`) REFERENCES `asignaturas` (`id`) ON DELETE CASCADE;
+
+--
+-- Filtros para la tabla `telefonos`
+--
+ALTER TABLE `telefonos`
+  ADD CONSTRAINT `telefonos_ibfk_1` FOREIGN KEY (`id_alumno`) REFERENCES `alumnos` (`id`) ON DELETE CASCADE;
+COMMIT;
